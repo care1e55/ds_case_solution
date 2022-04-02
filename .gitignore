@@ -2,3 +2,4 @@ resources/
 .idea/
 *.csv
 .venv
+src/__pycache__/
