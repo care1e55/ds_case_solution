@@ -33,6 +33,7 @@ def workhours(date_from: str, date_to: str) -> int:
             workhours_counter += 1
     return workhours_counter
 
+
 if __name__ == '__main__':
     test_from_1 = "2019-12-02 08:00:00"
     test_to_1 = "2019-12-04 12:15:00"
