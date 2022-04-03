@@ -1,12 +1,15 @@
+from __future__ import annotations
+
+import typer
 from pathlib import Path
 
+import pandas as pd
 import numpy as np
-import typer
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OrdinalEncoder
-import pandas as pd
 import warnings
+
 warnings.filterwarnings('ignore')
 
 app = typer.Typer()
@@ -34,7 +37,7 @@ class Pipeline:
     def encode_binary_onehot(data: pd.DataFrame, column: str) -> pd.DataFrame:
         return pd.get_dummies(data[column]).rename(columns={0: f'not_{column}', 1: column}).reset_index(drop=True)
 
-    def _get_features(self, data):
+    def _get_features(self, data: pd.DataFrame) -> pd.DataFrame:
         features = data[[
             'yr',
             'mnth',
@@ -59,19 +62,19 @@ class Pipeline:
             ), axis=1)
         return features
 
-    def _get_target(self, data):
+    def _get_target(self, data: pd.DataFrame) -> pd.Series:
         return data['cnt']
 
-    def fit(self, data):
+    def fit(self, data: pd.DataFrame) -> Pipeline:
         X, y = self._get_features(data), self._get_target(data)
         self.model.fit(X, y)
         return self
 
-    def predict(self, data):
+    def predict(self, data: pd.DataFrame) -> np.ndarray:
         X = self._get_features(data)
         return self.model.predict(X)
 
-    def score(self, data):
+    def score(self, data: pd.DataFrame) -> float:
         X = self._get_features(data)
         target = self._get_target(data)
         return self.model.score(X, target)
@@ -79,7 +82,7 @@ class Pipeline:
 
 @app.command()
 def evaluate(
-    data_path: Path = typer.Option(...),
+    data_path: Path = typer.Option(Path('data.csv')),
     test_size: float = typer.Option(0.25),
     random_state: int = typer.Option(42),
 ):
