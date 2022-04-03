@@ -35,7 +35,7 @@ class Pipeline:
 
 @app.command()
 def evaluate(
-    data_path: Path = typer.Option('resources/data.csv'),
+    data_path: Path = typer.Option(...),
     test_size: float = typer.Option(0.25),
     random_state: int = typer.Option(42),
 ):
@@ -44,7 +44,7 @@ def evaluate(
     pipeline = Pipeline(random_state=random_state)
     pipeline.fit(data_train)
     score = pipeline.score(data_test)
-    typer.echo(f"The score is {score}")
+    typer.echo(f"The R^2 score is {score}")
 
 
 if __name__ == '__main__':
