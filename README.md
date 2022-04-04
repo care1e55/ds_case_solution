@@ -30,6 +30,11 @@ Run with parameters:
 python src/pipeline.py --data-path 'resources/data.csv' --test-size '0.25'
 ```
 
+Or just put the `data.csv` in the project root path:
+```bash
+python src/pipeline.py
+```
+
 #### Workhours
 Instantiate the difference in workhours by iterating through and check if hour is a workhour.
 

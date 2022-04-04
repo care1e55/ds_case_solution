@@ -2,10 +2,14 @@
 name = "bdf_case"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["care1e55 <sfilms89@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+scikit-learn = "*"
+typer = "*"
+pandas = "*"
+numpy = "*"
 
 [tool.poetry.dev-dependencies]
 
